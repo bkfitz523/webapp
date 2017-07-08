@@ -101,7 +101,7 @@ class Pokemon(models.Model):
     name = models.CharField(max_length=50)
     type_1 = models.CharField(max_length=20)
     type_2 = models.CharField(max_length=20, blank=True)
-    region = models.CharField(max_length=50, choices=REGION_CHOICES, default=KANTO)
+    # region = models.CharField(max_length=50, choices=REGION_CHOICES, default=KANTO)
     region = models.ForeignKey(
         Region,
         on_delete=models.CASCADE,
@@ -112,16 +112,18 @@ class Pokemon(models.Model):
         return self.name
 
 
-class Trainer(models.Model):
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=50)
-    hometown = models.CharField(max_length=127)
-    # region = models.CharField(max_length=50, choices=REGION_CHOICES, default=KANTO)
-    region = models.OneToOneField(
-        Region,
-        on_delete=models.CASCADE,
-        primary_key=True,
-    )
+# class Trainer(models.Model):
+#     id = models.IntegerField(primary_key=True)
+#     name = models.CharField(max_length=50)
+#     hometown = models.CharField(max_length=127)
+#     # champion = models.BooleanField(default=False)
+#     # region = models.CharField(max_length=50, choices=REGION_CHOICES, default=KANTO)
+#     # region = models.ForeignKey(
+#     #     Region,
+#     #     on_delete=models.CASCADE,
+#     #     # primary_key=False,
+#     # )
+
 
 '''
 class Team(models.Model):
