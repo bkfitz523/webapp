@@ -5,24 +5,125 @@ from django.db import models
 # Create your models here.
 
 
-class Pokemon(models.Model):
+class Region(models.Model):
+    KANTO = 'Kanto'
+    JOHTO = 'Johto'
+    HOENN = 'Hoenn'
+    SINNOH = 'Sinnoh'
+    UNOVA = 'Unova'
+    KALOS = 'Kalos'
+    ALOLA = 'Alola'
+
+    REGION_CHOICES = (
+        (KANTO, 'Kanto'),
+        (JOHTO, 'Johto'),
+        (HOENN, 'Hoenn'),
+        (SINNOH, 'Sinnoh'),
+        (UNOVA, 'Unova'),
+        (KALOS, 'Kalos'),
+        (ALOLA, 'Alola')
+    )
+
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=50)
-    type_1 = models.CharField(max_length=20)
-    type_2 = models.CharField(max_length=20, blank=True)
-    region = models.CharField(max_length=50)
+    name = models.CharField(max_length=64, choices=REGION_CHOICES, default=KANTO)
+    # region = models.CharField(max_length=50, choices=REGION_CHOICES, default=KANTO)
 
     def __str__(self):
         return self.name
 
-'''
+
+class Type(models.Model):
+    NORMAL = 'Normal'
+    FIGHTING = 'Fighting'
+    FLYING = 'Flying'
+    POISON = 'Poison'
+    GROUND = 'Ground'
+    ROCK = 'Rock'
+    BUG = 'Bug'
+    GHOST = 'Ghost'
+    STEEL = 'Steel'
+    FIRE = 'Fire'
+    WATER = 'Water'
+    GRASS = 'Grass'
+    ELECTRIC = 'Electric'
+    PSYCHIC = 'Psychic'
+    ICE = 'Ice'
+    DRAGON = 'Dragon'
+    DARK = 'Dark'
+    FAIRY = 'Fairy'
+
+
+    TYPE_CHOICES = (
+        (NORMAL, 'Normal'),
+        (FIGHTING, 'Fighting'),
+        (FLYING, 'Flying'),
+        (POISON, 'Poison'),
+        (GROUND, 'Ground'),
+        (ROCK, 'Rock'),
+        (BUG, 'Bug'),
+        (GHOST, 'Ghost'),
+        (STEEL, 'Steel'),
+        (FIRE, 'Fire'),
+        (WATER, 'Water'),
+        (GRASS, 'Grass'),
+        (ELECTRIC, 'Electric'),
+        (PSYCHIC, 'Psychic'),
+        (ICE, 'Ice'),
+        (DRAGON, 'Dragon'),
+        (DARK, 'Dark'),
+        (FAIRY, 'Fairy')
+    )
+
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=64, choices=TYPE_CHOICES, default=NORMAL)
+
+
+class Pokemon(models.Model):
+    KANTO = 'Kanto'
+    JOHTO = 'Johto'
+    HOENN = 'Hoenn'
+    SINNOH = 'Sinnoh'
+    UNOVA = 'Unova'
+    KALOS = 'Kalos'
+    ALOLA = 'Alola'
+
+    REGION_CHOICES = (
+        (KANTO, 'Kanto'),
+        (JOHTO, 'Johto'),
+        (HOENN, 'Hoenn'),
+        (SINNOH, 'Sinnoh'),
+        (UNOVA, 'Unova'),
+        (KALOS, 'Kalos'),
+        (ALOLA, 'Alola')
+    )
+
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=50)
+    type_1 = models.CharField(max_length=20)
+    type_2 = models.CharField(max_length=20, blank=True)
+    region = models.CharField(max_length=50, choices=REGION_CHOICES, default=KANTO)
+    region = models.ForeignKey(
+        Region,
+        on_delete=models.CASCADE,
+        # primary_key=True,
+    )
+
+    def __str__(self):
+        return self.name
+
+
 class Trainer(models.Model):
-    id = models.IntegerField(max_length=7)
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=50)
     hometown = models.CharField(max_length=127)
-    region = models.CharField(max_length=50)
+    # region = models.CharField(max_length=50, choices=REGION_CHOICES, default=KANTO)
+    region = models.OneToOneField(
+        Region,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
 
-
+'''
 class Team(models.Model):
     id = models.IntegerField(max_length=8)
     name = models.CharField(max_length=50)

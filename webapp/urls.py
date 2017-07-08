@@ -24,5 +24,6 @@ urlpatterns = [
         view=views.index,
         name='home',
     ),
+    # url(r'^$', views=views.MyView('*')),
     url(r'^admin/', admin.site.urls),
 ]
