@@ -1,5 +1,5 @@
 from django.contrib import admin
-from collection.models import Pokemon, Region, Type
+from collection.models import Pokemon, Region, Type, Nature
 # from collection.models import Trainer
 
 # Register your models here.
@@ -23,6 +23,10 @@ class RegionAdmin(admin.ModelAdmin):
     ordering = ('id',)
 admin.site.register(Region, RegionAdmin)
 
+class NatureAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'increase', 'decrease')
+    ordering = ('id',)
+admin.site.register(Nature, NatureAdmin)
 
 # class TrainerAdmin(admin.ModelAdmin):
 #     list_display = ('id', 'name', 'region')

@@ -32,6 +32,12 @@ class Region(models.Model):
         return self.name
 
 
+class Nature(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=50)
+    increase = models.CharField(max_length=50, blank=True)
+    decrease = models.CharField(max_length=50, blank=True)
+
 class Type(models.Model):
     NORMAL = 'Normal'
     FIGHTING = 'Fighting'
